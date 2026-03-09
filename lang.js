@@ -1607,7 +1607,7 @@ var T = {
             h_ascension: "Înălțarea", h_ascension_d: "Variabil (mai/iunie)",
             h_pentecost: "Lunea Rusaliilor", h_pentecost_d: "Variabil (mai/iunie)",
             h_national: "Ziua Națională Elvețiană", h_national_d: "1 august",
-            h_jeune: "Postul genevrез", h_jeune_d: "Joi după prima duminică din septembrie",
+            h_jeune: "Postul genevez", h_jeune_d: "Joi după prima duminică din septembrie",
             h_christmas: "Crăciunul", h_christmas_d: "25 decembrie",
             h_restauration: "Restaurarea Republicii", h_restauration_d: "31 decembrie",
             h_escalade: "Festivalul Escaladei", h_escalade_d: "11-12 decembrie",
@@ -1616,7 +1616,7 @@ var T = {
         sq: {
             historyTitle: "Historia e Gjenevës",
             historyP1: "E themeluar në kohën romake, Gjeneva u bë një udhëkryq i rëndësishëm europian. Qyteti i Kalvinit në shekullin e 16-të, ajo përqafoi Reformën Protestante dhe ndërtoi një reputacion tolerance dhe hapjeje intelektuale.",
-            historyP2: "Në 1602, qyteti zmbrapi sulmin e dukës së Savojës gjatë Escalade-s, ngjarje themeluese e identitetit gjenevrез, e festuar çdo dhjetor. Gjeneva iu bashkua Konfederatës Zvicerane në 1815.",
+            historyP2: "Në 1602, qyteti zmbrapi sulmin e dukës së Savojës gjatë Escalade-s, ngjarje themeluese e identitetit gjenevrez, e festuar çdo dhjetor. Gjeneva iu bashkua Konfederatës Zvicerane në 1815.",
             historyP3: "Sot, Gjeneva është një qendër botërore e diplomacisë dhe bashkëpunimit ndërkombëtar. Ajo strehon selinë evropiane të OKB-së, CERN-in, Kryqin e Kuq Ndërkombëtar (ICRC), OBSH-në dhe mbi 200 organizata ndërkombëtare.",
             holidaysTitle: "Festat zyrtare dhe festivitetet",
             h_newyear: "Viti i Ri", h_newyear_d: "1 janar",
