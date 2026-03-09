@@ -189,6 +189,7 @@ body {
     color: white;
     position: relative;
     overflow: hidden;
+    z-index: 1;
 }
 
 .hero-bg {
@@ -208,7 +209,31 @@ body {
 .hero-photo-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(26,51,82,0.88) 0%, rgba(30,58,95,0.82) 40%, rgba(36,61,92,0.85) 100%);
+    background: linear-gradient(135deg, rgba(26,51,82,0.85) 0%, rgba(30,58,95,0.75) 40%, rgba(36,61,92,0.80) 100%);
+}
+
+/* Hero floating water particles (Jet d'Eau effect) */
+.hero-particles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.hero-particle {
+    position: absolute;
+    width: var(--size, 4px);
+    height: var(--size, 4px);
+    background: radial-gradient(circle, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 70%);
+    border-radius: 50%;
+    animation: particleFloat var(--duration, 8s) var(--delay, 0s) infinite ease-in-out;
+}
+
+@keyframes particleFloat {
+    0% { transform: translate(0, 0) scale(0); opacity: 0; }
+    10% { opacity: 1; transform: translate(var(--dx1, 10px), var(--dy1, -30px)) scale(1); }
+    50% { opacity: 0.6; transform: translate(var(--dx2, 20px), var(--dy2, -80px)) scale(0.8); }
+    100% { transform: translate(var(--dx3, -10px), var(--dy3, -160px)) scale(0); opacity: 0; }
 }
 
 .hero-flag-svg {
@@ -239,6 +264,17 @@ body {
     letter-spacing: -0.03em;
     line-height: 1.15;
     margin-bottom: 10px;
+    background: linear-gradient(90deg, #ffffff 0%, var(--c-gold) 25%, #ffffff 50%, var(--c-gold) 75%, #ffffff 100%);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: titleShimmer 6s ease-in-out infinite;
+}
+
+@keyframes titleShimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
 }
 
 .hero-desc {
@@ -321,6 +357,8 @@ body {
 
 /* === Weather strip === */
 .weather-strip {
+    position: relative;
+    z-index: 1;
     background: var(--c-white);
     border-bottom: 1px solid var(--c-border);
     box-shadow: 0 2px 8px rgba(0,0,0,0.04);
@@ -353,6 +391,65 @@ body {
 .ws-value { font-weight: 700; color: var(--c-text); font-size: 0.95rem; }
 .ws-primary .ws-value { color: var(--c-primary); font-size: 1.05rem; }
 .ws-time .ws-value { color: var(--c-primary); }
+.ws-credit { font-size: 0.65rem; opacity: 0.5; border-right: none; }
+.ws-credit a { color: var(--c-muted); text-decoration: none; }
+.ws-credit a:hover { text-decoration: underline; }
+
+/* === Stats Strip === */
+.stats-strip {
+    background: linear-gradient(135deg, var(--c-primary) 0%, #243d5c 100%);
+    padding: 28px 24px;
+    border-bottom: 1px solid var(--c-border);
+}
+
+.stats-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    text-align: center;
+}
+
+.stat-item {
+    color: white;
+}
+
+.stat-number {
+    display: block;
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--c-gold);
+    line-height: 1.1;
+}
+
+.stat-plus {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--c-gold);
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.7);
+    margin-top: 4px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+@media (max-width: 768px) {
+    .stats-inner { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .stat-number { font-size: 1.5rem; }
+}
+
+@media (max-width: 480px) {
+    .stats-inner { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .stat-number { font-size: 1.3rem; }
+    .stat-label { font-size: 0.65rem; }
+}
 
 /* === Main === */
 .main {
@@ -389,6 +486,24 @@ body {
     font-weight: 700;
     letter-spacing: -0.02em;
     line-height: 1.3;
+    position: relative;
+    display: inline-block;
+}
+
+.sec-title::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--c-gold), var(--c-primary));
+    border-radius: 2px;
+    transition: width 0.5s ease;
+}
+
+.sec-header:hover .sec-title::after {
+    width: 100%;
 }
 
 .sec-desc {
@@ -415,8 +530,9 @@ body {
     transition: transform 0.15s, box-shadow 0.15s;
 }
 
-.emer:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
-.emer-num { font-size: 1.6rem; font-weight: 800; line-height: 1; margin-bottom: 3px; }
+.emer:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+.emer-num { font-size: 1.6rem; font-weight: 800; line-height: 1; margin-bottom: 3px; animation: emergencyPulse 3s ease-in-out infinite; }
+@keyframes emergencyPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.85; } }
 .emer-lbl { font-size: 0.7rem; font-weight: 500; opacity: 0.92; text-align: center; }
 
 .emer.red { background: #dc2626; }
@@ -461,9 +577,22 @@ body {
 
 .card:hover {
     border-color: transparent;
-    box-shadow: var(--shadow-md);
-    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(30,58,95,0.12), 0 0 0 1px rgba(30,58,95,0.06);
+    transform: translateY(-3px);
 }
+
+.card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius);
+    background: linear-gradient(135deg, rgba(212,168,67,0.04) 0%, transparent 50%, rgba(30,58,95,0.04) 100%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+
+.card:hover::after { opacity: 1; }
 
 .card:hover::before { background: var(--c-primary); }
 

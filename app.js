@@ -223,10 +223,12 @@
         return t.wCloudy || 'Nuageux';
     }
 
-    // Lake temperature
+    // Lake temperature (try current year, fallback to estimate)
     function fetchLakeTemp() {
         var el = document.getElementById('wsLake');
-        fetch('https://alplakes-eawag.s3.eu-central-1.amazonaws.com/simulations/delft3d-flow/geneva/T_2024.json', { mode: 'cors' })
+        var year = new Date().getFullYear();
+        var baseUrl = 'https://alplakes-eawag.s3.eu-central-1.amazonaws.com/simulations/delft3d-flow/geneva/T_';
+        fetch(baseUrl + year + '.json', { mode: 'cors' })
             .then(function(r) {
                 if (!r.ok) throw new Error('x');
                 return r.json();
@@ -308,11 +310,84 @@
         }
     });
 
+    // === Hero Particles (Jet d'Eau water effect) ===
+    function createParticles() {
+        var container = document.getElementById('heroParticles');
+        if (!container) return;
+        var count = window.innerWidth < 768 ? 15 : 30;
+        for (var i = 0; i < count; i++) {
+            var p = document.createElement('div');
+            p.className = 'hero-particle';
+            var size = Math.random() * 6 + 2;
+            var left = Math.random() * 100;
+            var top = 40 + Math.random() * 50;
+            var duration = Math.random() * 6 + 5;
+            var delay = Math.random() * 8;
+            var dx1 = (Math.random() - 0.5) * 60;
+            var dy1 = -(Math.random() * 40 + 10);
+            var dx2 = (Math.random() - 0.5) * 80;
+            var dy2 = -(Math.random() * 80 + 40);
+            var dx3 = (Math.random() - 0.5) * 100;
+            var dy3 = -(Math.random() * 140 + 60);
+            p.style.cssText = 'left:' + left + '%;top:' + top + '%;--size:' + size + 'px;--duration:' + duration + 's;--delay:' + delay + 's;--dx1:' + dx1 + 'px;--dy1:' + dy1 + 'px;--dx2:' + dx2 + 'px;--dy2:' + dy2 + 'px;--dx3:' + dx3 + 'px;--dy3:' + dy3 + 'px';
+            container.appendChild(p);
+        }
+    }
+
+    // === Parallax on Hero ===
+    function initParallax() {
+        var heroPhoto = document.querySelector('.hero-photo');
+        if (!heroPhoto) return;
+        window.addEventListener('scroll', function() {
+            var scrollY = window.pageYOffset;
+            var heroH = document.querySelector('.hero').offsetHeight;
+            if (scrollY < heroH) {
+                heroPhoto.style.transform = 'translateY(' + (scrollY * 0.3) + 'px) scale(1.05)';
+            }
+        }, { passive: true });
+    }
+
+    // === Animated Counters ===
+    function initCounters() {
+        var counters = document.querySelectorAll('.stat-number[data-target]');
+        if (!counters.length) return;
+
+        var observed = false;
+        var observer = new IntersectionObserver(function(entries) {
+            if (observed) return;
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    observed = true;
+                    counters.forEach(function(counter) {
+                        var target = parseInt(counter.getAttribute('data-target'), 10);
+                        var duration = 2000;
+                        var start = performance.now();
+
+                        function update(now) {
+                            var elapsed = now - start;
+                            var progress = Math.min(elapsed / duration, 1);
+                            var eased = 1 - Math.pow(1 - progress, 3);
+                            counter.textContent = Math.round(eased * target).toLocaleString('fr-CH');
+                            if (progress < 1) requestAnimationFrame(update);
+                        }
+                        requestAnimationFrame(update);
+                    });
+                    observer.disconnect();
+                }
+            });
+        }, { threshold: 0.3 });
+
+        observer.observe(document.querySelector('.stats-strip'));
+    }
+
     // === Init ===
     setLang(currentLang);
     fetchWeather();
     fetchLakeTemp();
     updateTime();
     animateOnScroll();
+    createParticles();
+    initParallax();
+    initCounters();
 
 })();
