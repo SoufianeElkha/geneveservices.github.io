@@ -69,6 +69,46 @@
         <div class="hero-photo"></div>
         <div class="hero-photo-overlay"></div>
         <div class="hero-particles" id="heroParticles"></div>
+        <!-- Animated Jet d'Eau SVG -->
+        <svg class="jet-deau-svg" viewBox="0 0 200 500" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+                <linearGradient id="jetGrad" x1="0" y1="1" x2="0" y2="0">
+                    <stop offset="0%" stop-color="rgba(255,255,255,0.05)"/>
+                    <stop offset="40%" stop-color="rgba(255,255,255,0.15)"/>
+                    <stop offset="100%" stop-color="rgba(255,255,255,0.3)"/>
+                </linearGradient>
+                <filter id="jetGlow">
+                    <feGaussianBlur stdDeviation="3" result="blur"/>
+                    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+                <radialGradient id="dropGrad">
+                    <stop offset="0%" stop-color="rgba(255,255,255,0.6)"/>
+                    <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+                </radialGradient>
+            </defs>
+            <!-- Main water column -->
+            <path class="jet-column" d="M100,480 Q98,400 99,300 Q100,200 100,80" stroke="url(#jetGrad)" stroke-width="3" fill="none" filter="url(#jetGlow)"/>
+            <path class="jet-column jet-col-2" d="M100,480 Q102,390 101,280 Q100,180 100,80" stroke="url(#jetGrad)" stroke-width="2" fill="none" filter="url(#jetGlow)"/>
+            <!-- Spray at the top -->
+            <circle class="jet-drop jd1" cx="100" cy="60" r="2" fill="url(#dropGrad)"/>
+            <circle class="jet-drop jd2" cx="92" cy="75" r="1.5" fill="url(#dropGrad)"/>
+            <circle class="jet-drop jd3" cx="108" cy="70" r="1.8" fill="url(#dropGrad)"/>
+            <circle class="jet-drop jd4" cx="85" cy="95" r="1.2" fill="url(#dropGrad)"/>
+            <circle class="jet-drop jd5" cx="115" cy="90" r="1.4" fill="url(#dropGrad)"/>
+            <circle class="jet-drop jd6" cx="78" cy="120" r="1" fill="url(#dropGrad)"/>
+            <circle class="jet-drop jd7" cx="122" cy="115" r="1.1" fill="url(#dropGrad)"/>
+            <circle class="jet-drop jd8" cx="95" cy="50" r="1.3" fill="url(#dropGrad)"/>
+            <circle class="jet-drop jd9" cx="105" cy="55" r="1.6" fill="url(#dropGrad)"/>
+            <circle class="jet-drop jd10" cx="88" cy="85" r="1" fill="url(#dropGrad)"/>
+            <circle class="jet-drop jd11" cx="112" cy="80" r="1.2" fill="url(#dropGrad)"/>
+            <circle class="jet-drop jd12" cx="75" cy="140" r="0.8" fill="url(#dropGrad)"/>
+            <!-- Base splash -->
+            <ellipse class="jet-base" cx="100" cy="485" rx="30" ry="6" fill="rgba(255,255,255,0.08)"/>
+            <!-- Water surface ripples -->
+            <ellipse class="jet-ripple r1" cx="100" cy="488" rx="20" ry="4" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+            <ellipse class="jet-ripple r2" cx="100" cy="488" rx="20" ry="4" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+            <ellipse class="jet-ripple r3" cx="100" cy="488" rx="20" ry="4" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+        </svg>
     </div>
     <!-- Geneva Canton Flag: half eagle (gold side), half key (red side) -->
     <svg class="hero-flag-svg" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -138,18 +178,22 @@
         <div class="stat-item">
             <span class="stat-number" data-target="500000">0</span>
             <span class="stat-label" data-i18n="statPop">Habitants (canton)</span>
+            <span class="stat-source"><a href="https://www.ge.ch/statistique/domaines/01/01_02/tableaux.asp" target="_blank" rel="noopener">OCSTAT Gen&egrave;ve</a></span>
         </div>
         <div class="stat-item">
             <span class="stat-number" data-target="200">0</span><span class="stat-plus">+</span>
             <span class="stat-label" data-i18n="statOrgs">Organisations internationales</span>
+            <span class="stat-source"><a href="https://www.eda.admin.ch/missions/mission-onu-geneve/fr/home/geneve-internationale/faits-et-chiffres.html" target="_blank" rel="noopener">DFAE</a></span>
         </div>
         <div class="stat-item">
             <span class="stat-number" data-target="38">0</span>
             <span class="stat-label" data-i18n="statMissions">Missions diplomatiques</span>
+            <span class="stat-source"><a href="https://www.eda.admin.ch/missions/mission-onu-geneve/fr/home/geneve-internationale/faits-et-chiffres.html" target="_blank" rel="noopener">DFAE</a></span>
         </div>
         <div class="stat-item">
             <span class="stat-number" data-target="180">0</span><span class="stat-plus">+</span>
             <span class="stat-label" data-i18n="statNat">Nationalit&eacute;s</span>
+            <span class="stat-source"><a href="https://www.ge.ch/statistique/domaines/01/01_03/tableaux.asp" target="_blank" rel="noopener">OCSTAT Gen&egrave;ve</a></span>
         </div>
     </div>
 </section>
@@ -462,6 +506,7 @@
             <p data-i18n="historyP2">Entr&eacute;e dans la Conf&eacute;d&eacute;ration suisse en 1815, Gen&egrave;ve est aujourd'hui le si&egrave;ge europ&eacute;en de l'ONU, du CICR, de l'OMS, du CERN et de plus de 40 organisations internationales. Le <strong>Jet d'eau</strong> (140m), embl&egrave;me de la ville, s'&eacute;l&egrave;ve sur le lac L&eacute;man depuis 1891.</p>
             <br>
             <p data-i18n="historyP3">Le canton compte environ <strong>500'000 habitants</strong> et accueille chaque jour <strong>112'000 travailleurs frontaliers</strong> de France voisine, faisant de Gen&egrave;ve l'une des villes les plus internationales au monde avec plus de 40% de r&eacute;sidents &eacute;trangers.</p>
+            <p class="data-sources">Sources&nbsp;: <a href="https://www.ge.ch/statistique/domaines/01/01_02/tableaux.asp" target="_blank" rel="noopener">OCSTAT</a> &middot; <a href="https://www.eda.admin.ch/missions/mission-onu-geneve/fr/home/geneve-internationale/faits-et-chiffres.html" target="_blank" rel="noopener">DFAE</a> &middot; <a href="https://www.bfs.admin.ch/bfs/fr/home/statistiques/travail-remuneration/activite-professionnelle-temps-travail/actifs-occupes/frontaliers.html" target="_blank" rel="noopener">OFS (frontaliers)</a></p>
         </div>
         <a href="histoire.html" class="history-link">&#128214; D&eacute;couvrir l'histoire compl&egrave;te de Gen&egrave;ve &rarr;</a>
     </div>

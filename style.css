@@ -236,6 +236,101 @@ body {
     100% { transform: translate(var(--dx3, -10px), var(--dy3, -160px)) scale(0); opacity: 0; }
 }
 
+/* === Animated Jet d'Eau SVG === */
+.jet-deau-svg {
+    position: absolute;
+    right: 5%;
+    bottom: -10px;
+    width: 180px;
+    height: 450px;
+    z-index: 1;
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.jet-column {
+    animation: jetSway 4s ease-in-out infinite;
+    transform-origin: 100px 480px;
+}
+.jet-col-2 {
+    animation: jetSway 4s ease-in-out infinite reverse;
+    animation-delay: -1s;
+}
+
+@keyframes jetSway {
+    0%, 100% { transform: translateX(-1px) scaleY(1); }
+    25% { transform: translateX(1px) scaleY(1.02); }
+    50% { transform: translateX(1.5px) scaleY(0.98); }
+    75% { transform: translateX(-0.5px) scaleY(1.01); }
+}
+
+/* Spray drops floating upward and outward */
+.jet-drop {
+    animation: dropFloat 3s ease-out infinite;
+}
+.jd1  { animation-duration: 2.8s; animation-delay: 0s; }
+.jd2  { animation-duration: 3.2s; animation-delay: 0.3s; }
+.jd3  { animation-duration: 2.6s; animation-delay: 0.6s; }
+.jd4  { animation-duration: 3.5s; animation-delay: 0.1s; }
+.jd5  { animation-duration: 3.0s; animation-delay: 0.8s; }
+.jd6  { animation-duration: 3.8s; animation-delay: 0.4s; }
+.jd7  { animation-duration: 3.3s; animation-delay: 0.7s; }
+.jd8  { animation-duration: 2.5s; animation-delay: 0.2s; }
+.jd9  { animation-duration: 2.9s; animation-delay: 0.5s; }
+.jd10 { animation-duration: 3.1s; animation-delay: 0.9s; }
+.jd11 { animation-duration: 2.7s; animation-delay: 1.1s; }
+.jd12 { animation-duration: 3.6s; animation-delay: 0.15s; }
+
+@keyframes dropFloat {
+    0% { opacity: 0; transform: translate(0, 0) scale(0.5); }
+    15% { opacity: 0.8; transform: translate(var(--dx, 0), -10px) scale(1.2); }
+    50% { opacity: 0.5; transform: translate(calc(var(--dx, 0) * 2), -5px) scale(1); }
+    100% { opacity: 0; transform: translate(calc(var(--dx, 0) * 3), 40px) scale(0.3); }
+}
+.jd1  { --dx: -3px; }
+.jd2  { --dx: -8px; }
+.jd3  { --dx: 8px; }
+.jd4  { --dx: -15px; }
+.jd5  { --dx: 15px; }
+.jd6  { --dx: -22px; }
+.jd7  { --dx: 22px; }
+.jd8  { --dx: -5px; }
+.jd9  { --dx: 5px; }
+.jd10 { --dx: -12px; }
+.jd11 { --dx: 12px; }
+.jd12 { --dx: -25px; }
+
+/* Base splash pulsing */
+.jet-base {
+    animation: basePulse 2s ease-in-out infinite;
+}
+@keyframes basePulse {
+    0%, 100% { rx: 28; opacity: 0.6; }
+    50% { rx: 34; opacity: 0.9; }
+}
+
+/* Expanding water ripples */
+.jet-ripple {
+    animation: rippleExpand 3s ease-out infinite;
+}
+.r1 { animation-delay: 0s; }
+.r2 { animation-delay: 1s; }
+.r3 { animation-delay: 2s; }
+
+@keyframes rippleExpand {
+    0% { rx: 15; ry: 3; opacity: 0.15; }
+    100% { rx: 60; ry: 10; opacity: 0; }
+}
+
+@media (max-width: 768px) {
+    .jet-deau-svg {
+        width: 120px;
+        height: 300px;
+        right: 2%;
+        opacity: 0.5;
+    }
+}
+
 .hero-flag-svg {
     position: absolute;
     top: 50%;
@@ -438,6 +533,38 @@ body {
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+}
+
+.stat-source {
+    display: block;
+    font-size: 0.6rem;
+    margin-top: 3px;
+    opacity: 0.5;
+}
+.stat-source a {
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    border-bottom: 1px dotted rgba(255,255,255,0.3);
+}
+.stat-source a:hover {
+    opacity: 1;
+    border-bottom-style: solid;
+}
+
+.data-sources {
+    margin-top: 12px;
+    font-size: 0.72rem;
+    color: var(--c-muted);
+    opacity: 0.7;
+}
+.data-sources a {
+    color: var(--c-muted);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--c-border);
+}
+.data-sources a:hover {
+    color: var(--c-primary);
+    border-bottom-color: var(--c-primary);
 }
 
 @media (max-width: 768px) {
