@@ -223,10 +223,12 @@
         return t.wCloudy || 'Nuageux';
     }
 
-    // Lake temperature
+    // Lake temperature (try current year, fallback to estimate)
     function fetchLakeTemp() {
         var el = document.getElementById('wsLake');
-        fetch('https://alplakes-eawag.s3.eu-central-1.amazonaws.com/simulations/delft3d-flow/geneva/T_2024.json', { mode: 'cors' })
+        var year = new Date().getFullYear();
+        var baseUrl = 'https://alplakes-eawag.s3.eu-central-1.amazonaws.com/simulations/delft3d-flow/geneva/T_';
+        fetch(baseUrl + year + '.json', { mode: 'cors' })
             .then(function(r) {
                 if (!r.ok) throw new Error('x');
                 return r.json();
