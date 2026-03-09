@@ -26,12 +26,10 @@
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#1e3a5f">
 
+    <link rel="stylesheet" href="fonts/inter.css">
     <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <link rel="stylesheet" href="leaflet.css">
+    <script src="leaflet.js"></script>
 </head>
 <body>
 
@@ -70,6 +68,7 @@
     <div class="hero-bg">
         <div class="hero-photo"></div>
         <div class="hero-photo-overlay"></div>
+        <div class="hero-particles" id="heroParticles"></div>
     </div>
     <!-- Geneva Canton Flag: half eagle (gold side), half key (red side) -->
     <svg class="hero-flag-svg" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -131,6 +130,27 @@
         <div class="ws-item ws-time"><span class="ws-ico">&#128336;</span><div class="ws-text"><span class="ws-label" data-i18n="localTime">Heure locale</span><span class="ws-value" id="wsTime">--</span></div></div>
         <div class="ws-item ws-time"><span class="ws-ico">&#128197;</span><div class="ws-text"><span class="ws-label" data-i18n="today">Aujourd'hui</span><span class="ws-value" id="wsDate">--</span></div></div>
         <div class="ws-item ws-credit"><a href="https://open-meteo.com/" target="_blank" rel="noopener" title="Open-Meteo Free Weather API">Open-Meteo.com</a></div>
+    </div>
+</section>
+
+<section class="stats-strip">
+    <div class="stats-inner">
+        <div class="stat-item">
+            <span class="stat-number" data-target="500000">0</span>
+            <span class="stat-label" data-i18n="statPop">Habitants (canton)</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number" data-target="200">0</span><span class="stat-plus">+</span>
+            <span class="stat-label" data-i18n="statOrgs">Organisations internationales</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number" data-target="38">0</span>
+            <span class="stat-label" data-i18n="statMissions">Missions diplomatiques</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number" data-target="180">0</span><span class="stat-plus">+</span>
+            <span class="stat-label" data-i18n="statNat">Nationalit&eacute;s</span>
+        </div>
     </div>
 </section>
 
@@ -509,6 +529,14 @@
         </div>
         <div class="modal-body">
             <div class="legal-block">
+                <h4>&#201;diteur du site</h4>
+                <p><strong>Gen&egrave;ve Services</strong> &mdash; Portail informatif non-officiel et ind&eacute;pendant.<br>
+                Contact : <em>[adresse e-mail &agrave; compl&eacute;ter]</em><br>
+                Responsable : <em>[nom &agrave; compl&eacute;ter]</em><br>
+                Adresse : <em>[adresse postale &agrave; compl&eacute;ter]</em>, Gen&egrave;ve, Suisse.<br>
+                H&eacute;bergement : GitHub Pages (GitHub, Inc. &mdash; San Francisco, CA, USA).</p>
+            </div>
+            <div class="legal-block">
                 <h4>Nature du site</h4>
                 <p>Ce site est un <strong>portail informatif non-officiel et ind&eacute;pendant</strong>. Il n'est ni affili&eacute;, ni approuv&eacute;, ni sponsoris&eacute; par l'&Eacute;tat de Gen&egrave;ve, la Ville de Gen&egrave;ve, la Conf&eacute;d&eacute;ration suisse, ou toute autre entit&eacute; publique ou priv&eacute;e mentionn&eacute;e sur ce site. Les marques, logos et noms cit&eacute;s appartiennent &agrave; leurs propri&eacute;taires respectifs.</p>
             </div>
@@ -521,12 +549,30 @@
                 <p>Ce site contient des liens hypertextes vers des <strong>sites web tiers</strong> (sites officiels, services publics, entreprises). L'auteur n'a aucun contr&ocirc;le sur le contenu de ces sites externes et n'assume aucune responsabilit&eacute; quant &agrave; leur contenu, leur disponibilit&eacute; ou leur conformit&eacute;. L'activation de ces liens rel&egrave;ve de la seule responsabilit&eacute; de l'utilisateur.</p>
             </div>
             <div class="legal-block">
-                <h4>Propri&eacute;t&eacute; intellectuelle</h4>
-                <p>Le contenu r&eacute;dactionnel original de ce site (textes, mise en page, code source) est la propri&eacute;t&eacute; de son auteur. Les ic&ocirc;nes, noms de marques, logos et contenus de sites tiers restent la propri&eacute;t&eacute; de leurs d&eacute;tenteurs respectifs et sont utilis&eacute;s ici &agrave; des fins purement informatives.</p>
+                <h4>Propri&eacute;t&eacute; intellectuelle &amp; cr&eacute;dits</h4>
+                <p>Le contenu r&eacute;dactionnel original de ce site (textes, mise en page, code source) est la propri&eacute;t&eacute; de son auteur. Les ic&ocirc;nes, noms de marques, logos et contenus de sites tiers restent la propri&eacute;t&eacute; de leurs d&eacute;tenteurs respectifs.</p>
+                <p style="margin-top:8px"><strong>Cr&eacute;dits photos &amp; ressources :</strong></p>
+                <ul style="margin:6px 0 0 18px;font-size:0.78rem;color:var(--c-muted);line-height:1.6">
+                    <li>Photo d'en-t&ecirc;te : &laquo;&nbsp;Geneva &ndash; Pair of swans and Jet d'Eau&nbsp;&raquo; par <strong>Safa.daneshvar</strong> &mdash; <a href="https://commons.wikimedia.org/wiki/File:Geneva_-_Pair_of_swans_and_Jet_d%27Eau.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> &mdash; Licence <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a></li>
+                    <li>Donn&eacute;es m&eacute;t&eacute;o : <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo.com</a> &mdash; Licence <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a></li>
+                    <li>Temp&eacute;rature du lac : <a href="https://www.alplakes.eawag.ch/" target="_blank" rel="noopener">Alplakes / Eawag</a></li>
+                    <li>Carte : <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors &mdash; Licence <a href="https://opendatacommons.org/licenses/odbl/" target="_blank" rel="noopener">ODbL</a></li>
+                    <li>Biblioth&egrave;que cartographique : <a href="https://leafletjs.com/" target="_blank" rel="noopener">Leaflet</a> &mdash; Licence BSD-2-Clause</li>
+                    <li>Police de caract&egrave;res : <a href="https://rsms.me/inter/" target="_blank" rel="noopener">Inter</a> par Rasmus Andersson &mdash; <a href="https://scripts.sil.org/OFL" target="_blank" rel="noopener">SIL Open Font License 1.1</a></li>
+                </ul>
             </div>
             <div class="legal-block">
                 <h4>Protection des donn&eacute;es (nLPD / RGPD)</h4>
-                <p>Ce site <strong>ne collecte aucune donn&eacute;e personnelle</strong>. Aucun cookie de tra&ccedil;age, aucun outil d'analyse (analytics), aucun formulaire de contact et aucune inscription ne sont utilis&eacute;s. Les donn&eacute;es m&eacute;t&eacute;orologiques affich&eacute;es sont obtenues via des API publiques (Open-Meteo) sans transmission de donn&eacute;es personnelles. Ce site est conforme &agrave; la nLPD suisse et au RGPD europ&eacute;en.</p>
+                <p>Ce site <strong>ne collecte aucune donn&eacute;e personnelle</strong> de mani&egrave;re active. Aucun cookie de tra&ccedil;age, aucun outil d'analyse (analytics), aucun formulaire de contact et aucune inscription ne sont utilis&eacute;s.</p>
+                <p style="margin-top:8px">La pr&eacute;f&eacute;rence de langue est stock&eacute;e localement dans votre navigateur (<code>localStorage</code>) et n'est jamais transmise &agrave; un serveur.</p>
+                <p style="margin-top:8px"><strong>Services tiers :</strong> lors de la consultation de ce site, votre navigateur &eacute;tablit des connexions techniques avec les serveurs suivants, ce qui entra&icirc;ne la transmission de votre adresse IP :</p>
+                <ul style="margin:6px 0 0 18px;font-size:0.78rem;color:var(--c-muted);line-height:1.6">
+                    <li><strong>OpenStreetMap</strong> (tuiles cartographiques) &mdash; <a href="https://wiki.osmfoundation.org/wiki/Privacy_Policy" target="_blank" rel="noopener">politique de confidentialit&eacute;</a></li>
+                    <li><strong>Open-Meteo</strong> (donn&eacute;es m&eacute;t&eacute;orologiques) &mdash; <a href="https://open-meteo.com/en/terms" target="_blank" rel="noopener">conditions</a></li>
+                    <li><strong>Alplakes / Eawag</strong> (temp&eacute;rature du lac via Amazon S3)</li>
+                    <li><strong>Wikimedia Commons</strong> (image d'en-t&ecirc;te)</li>
+                </ul>
+                <p style="margin-top:8px">Ce site est conforme &agrave; la nLPD suisse et au RGPD europ&eacute;en.</p>
             </div>
             <div class="legal-block">
                 <h4>Num&eacute;ros d'urgence</h4>
