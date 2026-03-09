@@ -117,7 +117,6 @@ body {
     width: 100%;
     height: 68px;
     background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Geneva_-_Pair_of_swans_and_Jet_d%27Eau.jpg/1920px-Geneva_-_Pair_of_swans_and_Jet_d%27Eau.jpg') center 30%/cover no-repeat;
-    overflow: hidden;
 }
 
 .city-banner-overlay {
