@@ -73,41 +73,49 @@
         <svg class="jet-deau-svg" viewBox="0 0 200 500" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <defs>
                 <linearGradient id="jetGrad" x1="0" y1="1" x2="0" y2="0">
-                    <stop offset="0%" stop-color="rgba(255,255,255,0.05)"/>
-                    <stop offset="40%" stop-color="rgba(255,255,255,0.15)"/>
-                    <stop offset="100%" stop-color="rgba(255,255,255,0.3)"/>
+                    <stop offset="0%" stop-color="rgba(255,255,255,0.15)"/>
+                    <stop offset="30%" stop-color="rgba(180,220,255,0.4)"/>
+                    <stop offset="70%" stop-color="rgba(200,230,255,0.6)"/>
+                    <stop offset="100%" stop-color="rgba(255,255,255,0.8)"/>
                 </linearGradient>
                 <filter id="jetGlow">
-                    <feGaussianBlur stdDeviation="3" result="blur"/>
+                    <feGaussianBlur stdDeviation="4" result="blur"/>
                     <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
                 </filter>
                 <radialGradient id="dropGrad">
-                    <stop offset="0%" stop-color="rgba(255,255,255,0.6)"/>
+                    <stop offset="0%" stop-color="rgba(200,230,255,0.9)"/>
+                    <stop offset="60%" stop-color="rgba(180,220,255,0.4)"/>
                     <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
                 </radialGradient>
             </defs>
             <!-- Main water column -->
-            <path class="jet-column" d="M100,480 Q98,400 99,300 Q100,200 100,80" stroke="url(#jetGrad)" stroke-width="3" fill="none" filter="url(#jetGlow)"/>
-            <path class="jet-column jet-col-2" d="M100,480 Q102,390 101,280 Q100,180 100,80" stroke="url(#jetGrad)" stroke-width="2" fill="none" filter="url(#jetGlow)"/>
+            <path class="jet-column" d="M100,480 Q97,380 99,280 Q100,180 100,60" stroke="url(#jetGrad)" stroke-width="4.5" fill="none" filter="url(#jetGlow)"/>
+            <path class="jet-column jet-col-2" d="M100,480 Q103,370 101,260 Q100,160 100,60" stroke="url(#jetGrad)" stroke-width="3" fill="none" filter="url(#jetGlow)"/>
+            <path class="jet-column" d="M100,480 Q100,380 100,270 Q100,170 100,60" stroke="rgba(255,255,255,0.15)" stroke-width="8" fill="none" filter="url(#jetGlow)"/>
             <!-- Spray at the top -->
-            <circle class="jet-drop jd1" cx="100" cy="60" r="2" fill="url(#dropGrad)"/>
-            <circle class="jet-drop jd2" cx="92" cy="75" r="1.5" fill="url(#dropGrad)"/>
-            <circle class="jet-drop jd3" cx="108" cy="70" r="1.8" fill="url(#dropGrad)"/>
-            <circle class="jet-drop jd4" cx="85" cy="95" r="1.2" fill="url(#dropGrad)"/>
-            <circle class="jet-drop jd5" cx="115" cy="90" r="1.4" fill="url(#dropGrad)"/>
-            <circle class="jet-drop jd6" cx="78" cy="120" r="1" fill="url(#dropGrad)"/>
-            <circle class="jet-drop jd7" cx="122" cy="115" r="1.1" fill="url(#dropGrad)"/>
-            <circle class="jet-drop jd8" cx="95" cy="50" r="1.3" fill="url(#dropGrad)"/>
-            <circle class="jet-drop jd9" cx="105" cy="55" r="1.6" fill="url(#dropGrad)"/>
-            <circle class="jet-drop jd10" cx="88" cy="85" r="1" fill="url(#dropGrad)"/>
-            <circle class="jet-drop jd11" cx="112" cy="80" r="1.2" fill="url(#dropGrad)"/>
-            <circle class="jet-drop jd12" cx="75" cy="140" r="0.8" fill="url(#dropGrad)"/>
+            <circle class="jet-drop jd1" cx="100" cy="45" r="3.5" fill="url(#dropGrad)"/>
+            <circle class="jet-drop jd2" cx="90" cy="65" r="3" fill="url(#dropGrad)"/>
+            <circle class="jet-drop jd3" cx="110" cy="58" r="3.2" fill="url(#dropGrad)"/>
+            <circle class="jet-drop jd4" cx="80" cy="90" r="2.5" fill="url(#dropGrad)"/>
+            <circle class="jet-drop jd5" cx="120" cy="82" r="2.8" fill="url(#dropGrad)"/>
+            <circle class="jet-drop jd6" cx="70" cy="120" r="2" fill="url(#dropGrad)"/>
+            <circle class="jet-drop jd7" cx="130" cy="112" r="2.2" fill="url(#dropGrad)"/>
+            <circle class="jet-drop jd8" cx="95" cy="35" r="2.8" fill="url(#dropGrad)"/>
+            <circle class="jet-drop jd9" cx="106" cy="40" r="3" fill="url(#dropGrad)"/>
+            <circle class="jet-drop jd10" cx="85" cy="78" r="2.2" fill="url(#dropGrad)"/>
+            <circle class="jet-drop jd11" cx="115" cy="72" r="2.5" fill="url(#dropGrad)"/>
+            <circle class="jet-drop jd12" cx="65" cy="145" r="1.8" fill="url(#dropGrad)"/>
+            <circle class="jet-drop jd1" cx="135" cy="140" r="1.6" fill="url(#dropGrad)"/>
+            <circle class="jet-drop jd3" cx="75" cy="105" r="2" fill="url(#dropGrad)"/>
+            <circle class="jet-drop jd5" cx="125" cy="98" r="2.3" fill="url(#dropGrad)"/>
+            <circle class="jet-drop jd8" cx="100" cy="28" r="2" fill="url(#dropGrad)"/>
             <!-- Base splash -->
-            <ellipse class="jet-base" cx="100" cy="485" rx="30" ry="6" fill="rgba(255,255,255,0.08)"/>
+            <ellipse class="jet-base" cx="100" cy="485" rx="35" ry="8" fill="rgba(180,220,255,0.2)"/>
+            <ellipse class="jet-base" cx="100" cy="483" rx="20" ry="5" fill="rgba(255,255,255,0.15)"/>
             <!-- Water surface ripples -->
-            <ellipse class="jet-ripple r1" cx="100" cy="488" rx="20" ry="4" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
-            <ellipse class="jet-ripple r2" cx="100" cy="488" rx="20" ry="4" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
-            <ellipse class="jet-ripple r3" cx="100" cy="488" rx="20" ry="4" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+            <ellipse class="jet-ripple r1" cx="100" cy="488" rx="20" ry="4" fill="none" stroke="rgba(180,220,255,0.25)" stroke-width="1"/>
+            <ellipse class="jet-ripple r2" cx="100" cy="488" rx="20" ry="4" fill="none" stroke="rgba(180,220,255,0.2)" stroke-width="0.8"/>
+            <ellipse class="jet-ripple r3" cx="100" cy="488" rx="20" ry="4" fill="none" stroke="rgba(180,220,255,0.15)" stroke-width="0.6"/>
         </svg>
     </div>
     <!-- Geneva Canton Flag: half eagle (gold side), half key (red side) -->

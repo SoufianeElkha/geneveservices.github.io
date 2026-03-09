@@ -239,12 +239,12 @@ body {
 /* === Animated Jet d'Eau SVG === */
 .jet-deau-svg {
     position: absolute;
-    right: 5%;
+    right: 38%;
     bottom: -10px;
-    width: 180px;
-    height: 450px;
+    width: 260px;
+    height: 500px;
     z-index: 1;
-    opacity: 0.7;
+    opacity: 1;
     pointer-events: none;
 }
 
@@ -324,10 +324,10 @@ body {
 
 @media (max-width: 768px) {
     .jet-deau-svg {
-        width: 120px;
-        height: 300px;
-        right: 2%;
-        opacity: 0.5;
+        width: 160px;
+        height: 380px;
+        right: 10%;
+        opacity: 0.8;
     }
 }
 
