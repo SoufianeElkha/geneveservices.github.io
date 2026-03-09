@@ -356,6 +356,9 @@ body {
 .ws-value { font-weight: 700; color: var(--c-text); font-size: 0.95rem; }
 .ws-primary .ws-value { color: var(--c-primary); font-size: 1.05rem; }
 .ws-time .ws-value { color: var(--c-primary); }
+.ws-credit { font-size: 0.65rem; opacity: 0.5; border-right: none; }
+.ws-credit a { color: var(--c-muted); text-decoration: none; }
+.ws-credit a:hover { text-decoration: underline; }
 
 /* === Main === */
 .main {
