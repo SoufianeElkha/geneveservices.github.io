@@ -70,54 +70,27 @@
         <div class="hero-photo-overlay"></div>
         <div class="hero-particles" id="heroParticles"></div>
     </div>
-    <!-- Animated Jet d'Eau SVG - outside hero-bg so it's visible -->
-    <svg class="jet-deau-svg" viewBox="0 0 200 500" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <defs>
-                <linearGradient id="jetGrad" x1="0" y1="1" x2="0" y2="0">
-                    <stop offset="0%" stop-color="rgba(255,255,255,0.15)"/>
-                    <stop offset="30%" stop-color="rgba(180,220,255,0.4)"/>
-                    <stop offset="70%" stop-color="rgba(200,230,255,0.6)"/>
-                    <stop offset="100%" stop-color="rgba(255,255,255,0.8)"/>
-                </linearGradient>
-                <filter id="jetGlow">
-                    <feGaussianBlur stdDeviation="4" result="blur"/>
-                    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-                </filter>
-                <radialGradient id="dropGrad">
-                    <stop offset="0%" stop-color="rgba(200,230,255,0.9)"/>
-                    <stop offset="60%" stop-color="rgba(180,220,255,0.4)"/>
-                    <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
-                </radialGradient>
-            </defs>
-            <!-- Main water column -->
-            <path class="jet-column" d="M100,480 Q97,380 99,280 Q100,180 100,60" stroke="url(#jetGrad)" stroke-width="4.5" fill="none" filter="url(#jetGlow)"/>
-            <path class="jet-column jet-col-2" d="M100,480 Q103,370 101,260 Q100,160 100,60" stroke="url(#jetGrad)" stroke-width="3" fill="none" filter="url(#jetGlow)"/>
-            <path class="jet-column" d="M100,480 Q100,380 100,270 Q100,170 100,60" stroke="rgba(255,255,255,0.15)" stroke-width="8" fill="none" filter="url(#jetGlow)"/>
-            <!-- Spray at the top -->
-            <circle class="jet-drop jd1" cx="100" cy="45" r="3.5" fill="url(#dropGrad)"/>
-            <circle class="jet-drop jd2" cx="90" cy="65" r="3" fill="url(#dropGrad)"/>
-            <circle class="jet-drop jd3" cx="110" cy="58" r="3.2" fill="url(#dropGrad)"/>
-            <circle class="jet-drop jd4" cx="80" cy="90" r="2.5" fill="url(#dropGrad)"/>
-            <circle class="jet-drop jd5" cx="120" cy="82" r="2.8" fill="url(#dropGrad)"/>
-            <circle class="jet-drop jd6" cx="70" cy="120" r="2" fill="url(#dropGrad)"/>
-            <circle class="jet-drop jd7" cx="130" cy="112" r="2.2" fill="url(#dropGrad)"/>
-            <circle class="jet-drop jd8" cx="95" cy="35" r="2.8" fill="url(#dropGrad)"/>
-            <circle class="jet-drop jd9" cx="106" cy="40" r="3" fill="url(#dropGrad)"/>
-            <circle class="jet-drop jd10" cx="85" cy="78" r="2.2" fill="url(#dropGrad)"/>
-            <circle class="jet-drop jd11" cx="115" cy="72" r="2.5" fill="url(#dropGrad)"/>
-            <circle class="jet-drop jd12" cx="65" cy="145" r="1.8" fill="url(#dropGrad)"/>
-            <circle class="jet-drop jd1" cx="135" cy="140" r="1.6" fill="url(#dropGrad)"/>
-            <circle class="jet-drop jd3" cx="75" cy="105" r="2" fill="url(#dropGrad)"/>
-            <circle class="jet-drop jd5" cx="125" cy="98" r="2.3" fill="url(#dropGrad)"/>
-            <circle class="jet-drop jd8" cx="100" cy="28" r="2" fill="url(#dropGrad)"/>
-            <!-- Base splash -->
-            <ellipse class="jet-base" cx="100" cy="485" rx="35" ry="8" fill="rgba(180,220,255,0.2)"/>
-            <ellipse class="jet-base" cx="100" cy="483" rx="20" ry="5" fill="rgba(255,255,255,0.15)"/>
-            <!-- Water surface ripples -->
-            <ellipse class="jet-ripple r1" cx="100" cy="488" rx="20" ry="4" fill="none" stroke="rgba(180,220,255,0.25)" stroke-width="1"/>
-            <ellipse class="jet-ripple r2" cx="100" cy="488" rx="20" ry="4" fill="none" stroke="rgba(180,220,255,0.2)" stroke-width="0.8"/>
-            <ellipse class="jet-ripple r3" cx="100" cy="488" rx="20" ry="4" fill="none" stroke="rgba(180,220,255,0.15)" stroke-width="0.6"/>
-        </svg>
+    <!-- Jet d'Eau - CSS animated water fountain -->
+    <div class="jet-deau" aria-hidden="true">
+        <div class="jet-water-column"></div>
+        <div class="jet-water-column jet-col-2"></div>
+        <div class="jet-spray">
+            <span class="jet-drop" style="--x:-5px;--y:0;--d:0.8s;--s:8px"></span>
+            <span class="jet-drop" style="--x:5px;--y:5px;--d:1.2s;--s:7px"></span>
+            <span class="jet-drop" style="--x:-15px;--y:15px;--d:0.6s;--s:6px"></span>
+            <span class="jet-drop" style="--x:15px;--y:12px;--d:1s;--s:6px"></span>
+            <span class="jet-drop" style="--x:-25px;--y:30px;--d:1.4s;--s:5px"></span>
+            <span class="jet-drop" style="--x:25px;--y:28px;--d:0.7s;--s:5px"></span>
+            <span class="jet-drop" style="--x:-35px;--y:50px;--d:1.1s;--s:4px"></span>
+            <span class="jet-drop" style="--x:35px;--y:45px;--d:0.9s;--s:4px"></span>
+            <span class="jet-drop" style="--x:-45px;--y:75px;--d:1.3s;--s:3px"></span>
+            <span class="jet-drop" style="--x:45px;--y:70px;--d:0.5s;--s:3px"></span>
+            <span class="jet-drop" style="--x:0;--y:-5px;--d:1.5s;--s:6px"></span>
+            <span class="jet-drop" style="--x:-10px;--y:8px;--d:0.4s;--s:5px"></span>
+            <span class="jet-drop" style="--x:10px;--y:10px;--d:1.6s;--s:5px"></span>
+        </div>
+        <div class="jet-base-splash"></div>
+    </div>
     <!-- Geneva Canton Flag: half eagle (gold side), half key (red side) -->
     <svg class="hero-flag-svg" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <!-- Shield shape -->
