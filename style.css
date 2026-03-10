@@ -117,13 +117,13 @@ body {
     width: 100%;
     height: 68px;
     overflow: visible;
-    background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Geneva_-_Pair_of_swans_and_Jet_d%27Eau.jpg/1920px-Geneva_-_Pair_of_swans_and_Jet_d%27Eau.jpg') center 30%/cover no-repeat;
+    background: linear-gradient(135deg, #0c192d 0%, #1a3352 50%, #243d5c 100%);
 }
 
 .city-banner-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(90deg, rgba(12,25,45,0.88) 0%, rgba(12,25,45,0.72) 40%, rgba(12,25,45,0.45) 100%);
+    background: linear-gradient(90deg, rgba(12,25,45,0.92) 0%, rgba(12,25,45,0.80) 40%, rgba(12,25,45,0.60) 100%);
 }
 
 .city-banner-inner {
@@ -203,7 +203,7 @@ body {
 .hero-photo {
     position: absolute;
     inset: 0;
-    background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Geneva_-_Pair_of_swans_and_Jet_d%27Eau.jpg/1280px-Geneva_-_Pair_of_swans_and_Jet_d%27Eau.jpg') center/cover no-repeat;
+    background: linear-gradient(160deg, #0f2137 0%, #1a3a5c 30%, #1e4a6e 60%, #16344f 100%);
 }
 
 .hero-photo-overlay {
@@ -234,6 +234,95 @@ body {
     10% { opacity: 1; transform: translate(var(--dx1, 10px), var(--dy1, -30px)) scale(1); }
     50% { opacity: 0.6; transform: translate(var(--dx2, 20px), var(--dy2, -80px)) scale(0.8); }
     100% { transform: translate(var(--dx3, -10px), var(--dy3, -160px)) scale(0); opacity: 0; }
+}
+
+/* === Animated Jet d'Eau (CSS) === */
+.jet-deau {
+    position: absolute;
+    right: 32%;
+    bottom: 0;
+    width: 120px;
+    height: 100%;
+    z-index: 3;
+    pointer-events: none;
+}
+
+/* Main water column */
+.jet-water-column {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 4px;
+    height: 85%;
+    transform: translateX(-50%);
+    background: linear-gradient(to top, rgba(255,255,255,0.1), rgba(180,220,255,0.5) 30%, rgba(220,240,255,0.8) 70%, white);
+    border-radius: 2px;
+    filter: blur(1px);
+    animation: jetSway 4s ease-in-out infinite;
+    transform-origin: bottom center;
+}
+.jet-water-column.jet-col-2 {
+    width: 8px;
+    opacity: 0.3;
+    filter: blur(3px);
+    animation-direction: reverse;
+    animation-delay: -1.5s;
+}
+
+@keyframes jetSway {
+    0%, 100% { transform: translateX(-50%) skewX(-0.5deg); }
+    50% { transform: translateX(-50%) skewX(0.5deg); }
+}
+
+/* Spray drops at the top */
+.jet-spray {
+    position: absolute;
+    top: 8%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 100px;
+}
+.jet-drop {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: var(--s, 6px);
+    height: var(--s, 6px);
+    background: radial-gradient(circle, white 0%, rgba(180,220,255,0.6) 60%, transparent 100%);
+    border-radius: 50%;
+    transform: translate(var(--x, 0), var(--y, 0));
+    animation: dropFloat var(--d, 1s) ease-in-out infinite alternate;
+}
+@keyframes dropFloat {
+    0% { opacity: 0.9; transform: translate(var(--x, 0), var(--y, 0)) scale(1); }
+    100% { opacity: 0.3; transform: translate(calc(var(--x, 0) * 1.5), calc(var(--y, 0) + 20px)) scale(0.4); }
+}
+
+/* Base splash */
+.jet-base-splash {
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 12px;
+    background: radial-gradient(ellipse, rgba(180,220,255,0.5) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: basePulse 2s ease-in-out infinite;
+}
+@keyframes basePulse {
+    0%, 100% { transform: translateX(-50%) scaleX(1); opacity: 0.7; }
+    50% { transform: translateX(-50%) scaleX(1.3); opacity: 1; }
+}
+
+@media (max-width: 768px) {
+    .jet-deau {
+        right: 50%;
+        transform: translateX(50%);
+        opacity: 0.6;
+        width: 80px;
+    }
 }
 
 .hero-flag-svg {
@@ -438,6 +527,38 @@ body {
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+}
+
+.stat-source {
+    display: block;
+    font-size: 0.6rem;
+    margin-top: 3px;
+    opacity: 0.5;
+}
+.stat-source a {
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    border-bottom: 1px dotted rgba(255,255,255,0.3);
+}
+.stat-source a:hover {
+    opacity: 1;
+    border-bottom-style: solid;
+}
+
+.data-sources {
+    margin-top: 12px;
+    font-size: 0.72rem;
+    color: var(--c-muted);
+    opacity: 0.7;
+}
+.data-sources a {
+    color: var(--c-muted);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--c-border);
+}
+.data-sources a:hover {
+    color: var(--c-primary);
+    border-bottom-color: var(--c-primary);
 }
 
 @media (max-width: 768px) {
