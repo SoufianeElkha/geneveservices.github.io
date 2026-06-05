@@ -380,6 +380,125 @@
         observer.observe(document.querySelector('.stats-strip'));
     }
 
+    // === Social share ===
+    function initShare() {
+        var url = 'https://geneveservice.ch/';
+        var title = 'Genève Service — Tous les services de Genève au même endroit';
+        var enc = encodeURIComponent(url);
+        var encT = encodeURIComponent(title);
+
+        var wa = document.getElementById('shareWhatsApp');
+        var fb = document.getElementById('shareFacebook');
+        var tw = document.getElementById('shareTwitter');
+        var em = document.getElementById('shareEmail');
+        var copy = document.getElementById('shareCopy');
+
+        if (wa) wa.href = 'https://wa.me/?text=' + encT + '%20' + enc;
+        if (fb) fb.href = 'https://www.facebook.com/sharer/sharer.php?u=' + enc;
+        if (tw) tw.href = 'https://twitter.com/intent/tweet?text=' + encT + '&url=' + enc;
+        if (em) em.href = 'mailto:?subject=' + encT + '&body=' + encT + '%0A%0A' + enc;
+
+        // On mobile with native share, route the WhatsApp button to the OS share sheet
+        if (navigator.share && wa) {
+            wa.addEventListener('click', function(e) {
+                e.preventDefault();
+                navigator.share({ title: title, url: url }).catch(function() {});
+            });
+        }
+
+        if (copy) {
+            copy.addEventListener('click', function() {
+                var done = function() {
+                    var label = document.getElementById('copyLabel');
+                    var t = T[currentLang] || T.fr;
+                    copy.classList.add('copied');
+                    if (label) label.textContent = t.copied || 'Copié !';
+                    setTimeout(function() {
+                        copy.classList.remove('copied');
+                        if (label) label.textContent = t.copyLink || 'Copier le lien';
+                    }, 2000);
+                };
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(url).then(done).catch(done);
+                } else {
+                    var ta = document.createElement('textarea');
+                    ta.value = url; document.body.appendChild(ta); ta.select();
+                    try { document.execCommand('copy'); } catch (e) {}
+                    document.body.removeChild(ta); done();
+                }
+            });
+        }
+    }
+
+    // === PWA: service worker + install prompt ===
+    function initPWA() {
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('sw.js').catch(function() {});
+            });
+        }
+
+        var deferredPrompt = null;
+        var installBtn = document.getElementById('installBtn');
+
+        window.addEventListener('beforeinstallprompt', function(e) {
+            e.preventDefault();
+            deferredPrompt = e;
+            if (installBtn) installBtn.hidden = false;
+        });
+
+        if (installBtn) {
+            installBtn.addEventListener('click', function() {
+                if (!deferredPrompt) return;
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then(function() {
+                    deferredPrompt = null;
+                    installBtn.hidden = true;
+                });
+            });
+        }
+
+        window.addEventListener('appinstalled', function() {
+            if (installBtn) installBtn.hidden = true;
+        });
+    }
+
+    // === Pharmacies: "open now" badge ===
+    // Adds a live "ouvert / fermé" badge based on opening hours stored in data-hours.
+    // Format: data-hours="HH:MM-HH:MM" (24h) or data-hours="24" for 24/7.
+    function initOpenNow() {
+        var cards = document.querySelectorAll('[data-hours]');
+        if (!cards.length) return;
+        var now = new Date();
+        var nowStr = now.toLocaleTimeString('fr-CH', { timeZone: 'Europe/Zurich', hour: '2-digit', minute: '2-digit', hour12: false });
+        var nowMin = parseInt(nowStr.slice(0, 2), 10) * 60 + parseInt(nowStr.slice(3, 5), 10);
+        var t = T[currentLang] || T.fr;
+
+        cards.forEach(function(card) {
+            var hours = card.getAttribute('data-hours');
+            var open = false;
+            if (hours === '24') {
+                open = true;
+            } else {
+                var parts = hours.split('-');
+                if (parts.length === 2) {
+                    var o = parseInt(parts[0].slice(0, 2), 10) * 60 + parseInt(parts[0].slice(3, 5), 10);
+                    var c = parseInt(parts[1].slice(0, 2), 10) * 60 + parseInt(parts[1].slice(3, 5), 10);
+                    open = nowMin >= o && nowMin < c;
+                }
+            }
+            var badge = card.querySelector('.open-badge');
+            if (!badge) {
+                badge = document.createElement('span');
+                badge.className = 'open-badge';
+                var body = card.querySelector('.card-body') || card;
+                body.appendChild(badge);
+            }
+            badge.textContent = open ? (t.openNow || 'Ouvert maintenant') : (t.closedNow || 'Fermé');
+            badge.className = 'open-badge ' + (open ? 'is-open' : 'is-closed');
+        });
+    }
+
     // === Init ===
     setLang(currentLang);
     fetchWeather();
@@ -389,5 +508,9 @@
     createParticles();
     initParallax();
     initCounters();
+    initShare();
+    initPWA();
+    initOpenNow();
+    setInterval(initOpenNow, 60000);
 
 })();

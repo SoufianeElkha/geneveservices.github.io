@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f2137"/>
+      <stop offset="50%" stop-color="#1e3a5f"/>
+      <stop offset="100%" stop-color="#16344f"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="50%" stop-color="#d4a843"/>
+      <stop offset="100%" stop-color="#ffffff"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <!-- Decorative water jet -->
+  <g opacity="0.15">
+    <rect x="1000" y="180" width="6" height="380" rx="3" fill="#cfe6ff"/>
+    <circle cx="1003" cy="170" r="14" fill="#cfe6ff"/>
+    <circle cx="985" cy="200" r="8" fill="#cfe6ff"/>
+    <circle cx="1022" cy="195" r="10" fill="#cfe6ff"/>
+    <circle cx="970" cy="240" r="6" fill="#cfe6ff"/>
+    <circle cx="1038" cy="235" r="7" fill="#cfe6ff"/>
+  </g>
+  <!-- Geneva flag badge -->
+  <g transform="translate(90,90)">
+    <rect width="150" height="150" rx="32" fill="#1a3352"/>
+    <rect x="25" y="25" width="50" height="100" fill="#d4a843"/>
+    <rect x="75" y="25" width="50" height="100" fill="#c8102e"/>
+    <g fill="#1e3a5f" transform="translate(50,75) scale(0.55)">
+      <ellipse cx="0" cy="-20" rx="18" ry="14"/>
+      <circle cx="0" cy="-42" r="10"/>
+      <path d="M-5,-8 L-50,30 L-40,22 L-52,50 L-38,35 L-42,58 L-28,40 L-20,20Z"/>
+      <path d="M5,-8 L50,30 L40,22 L52,50 L38,35 L42,58 L28,40 L20,20Z"/>
+    </g>
+    <g fill="#d4a843" transform="translate(100,75) scale(0.5)">
+      <rect x="-4" y="-50" width="8" height="70" rx="3"/>
+      <circle cx="0" cy="-55" r="14" fill="none" stroke="#d4a843" stroke-width="6"/>
+      <rect x="4" y="0" width="14" height="5" rx="2"/>
+      <rect x="4" y="12" width="10" height="5" rx="2"/>
+    </g>
+  </g>
+  <!-- Brand name -->
+  <text x="270" y="155" font-family="Inter, Arial, sans-serif" font-size="58" font-weight="800" fill="#ffffff">Genève Service</text>
+  <text x="270" y="205" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="500" fill="#d4a843">geneveservice.ch</text>
+  <!-- Main title -->
+  <text x="90" y="360" font-family="Inter, Arial, sans-serif" font-size="64" font-weight="800" fill="url(#gold)">Tous les services de Genève,</text>
+  <text x="90" y="440" font-family="Inter, Arial, sans-serif" font-size="64" font-weight="800" fill="#ffffff">au même endroit.</text>
+  <!-- Subtitle -->
+  <text x="90" y="510" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="400" fill="rgba(255,255,255,0.8)">Urgences · Santé · Transports · Administration · Culture</text>
+  <!-- Bottom badges -->
+  <g font-family="Inter, Arial, sans-serif" font-size="24" font-weight="600">
+    <rect x="90" y="545" width="170" height="48" rx="24" fill="rgba(255,255,255,0.1)"/>
+    <text x="115" y="576" fill="#ffffff">🚨 Urgences</text>
+    <rect x="280" y="545" width="200" height="48" rx="24" fill="rgba(255,255,255,0.1)"/>
+    <text x="305" y="576" fill="#ffffff">🌍 10 langues</text>
+    <rect x="500" y="545" width="180" height="48" rx="24" fill="rgba(255,255,255,0.1)"/>
+    <text x="525" y="576" fill="#ffffff">⛅ Météo live</text>
+  </g>
+</svg>

@@ -1,0 +1,21 @@
+{
+  "name": "Genève Service",
+  "short_name": "GE Service",
+  "description": "Tous les services de Genève au même endroit : urgences, santé, transports, administration, culture.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#1e3a5f",
+  "theme_color": "#1e3a5f",
+  "lang": "fr",
+  "categories": ["utilities", "travel", "news"],
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
